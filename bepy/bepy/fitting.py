@@ -458,7 +458,7 @@ def shoFit(responseFFT, numAcq, chirpMap=None, grid=None, lowFreq=None, highFreq
     # Get the multi columns from the products of these two
     columns = pd.Index(
         ['Packet', 'PlotGroup', 'Harmonic', 'InOut', 'DC', 'Multiplier', 'Amp', 'Phase', 'Res', 'Q', 'errA', 'errP',
-         'errRes', 'errQ', 'Iter', 'Flag', 'Msg'], names=['Values'])
+         'errRes', 'errQ', 'Iter', 'Flag', 'Msg'], name='Values')
 
     # Create the total output data
     extractedData = pd.DataFrame(outData, index=index, columns=columns)
