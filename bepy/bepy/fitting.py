@@ -13,6 +13,8 @@ import sys
 
 # Pass the frequency spectrum for a chirp and the frequnecy axis, and this function will return a guess for the
 # SHO fit
+# Parameters: ChirpData matrix, Frequency range 
+# Return: Set of fingerprints for guess of SHO
 def getSHOguess(chirpData, freq):
     # Get amplitude and phase
     amp = np.abs(chirpData)
@@ -57,18 +59,24 @@ def getSHOguess(chirpData, freq):
 
 
 # Complex gaussian function describing a damped-driven oscillator
+# Parameters: location, SHO Amplitude, SHO Phase, SHO Resonances, SHO Quality factor 
+# Return: Complex Gues function
 def complexGaus(x, a, phi, res, Q):
     func = a * np.exp(1j * phi) * res ** 2 / (x ** 2 - 1j * x * res / Q - res ** 2)
     return func
 
 
 # Amplitude of the complex gaussian
+# Parameters: location, SHO Amplitude, SHO Phase, SHO Resonances, SHO Quality factor
+# Return: Amplitude of the complex gaussian
 def complexGausAmp(x, a, res, Q):
     func = (a * res ** 2) / (np.sqrt(((x ** 2 - res ** 2) ** 2) + ((x ** 2 * res ** 2) / (Q ** 2))))
     return func
 
 
 # A standard moving average filter for data smoothing
+# Paramters: Data, Itinerations 
+# Return: smoothed Data
 def moving_average(a, n=3):
     ret = np.cumsum(a, dtype=float)
     ret[n:] = ret[n:] - ret[:-n]
